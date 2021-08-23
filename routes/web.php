@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\FonctionController;
+use App\Http\Controllers\PersonneController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,5 +16,9 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('index');
+    return view('login');
 });
+
+Route::get("/personne", [PersonneController::class, "index"]);
+Route::post("/addFonction", [FonctionController::class, "addFonction"]);
+
