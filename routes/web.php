@@ -22,7 +22,9 @@ Route::get('/', function () {
 Route::get("/personne", [PersonneController::class, "index"]);
 
 Route::get("/addPersonne", [PersonneController::class, "addPersonne"]);
-Route::post("/add", [PersonneController::class, "add"]);
+Route::post("/add", [PersonneController::class, "addPersonne"]);
+Route::get("/edit/{id}", [PersonneController::class, "addPersonne"]);
+Route::get("/delete/{id}", [PersonneController::class, "addPersonne"]);
 
 Route::post("/addFonction", [FonctionController::class, "addFonction"]);
 

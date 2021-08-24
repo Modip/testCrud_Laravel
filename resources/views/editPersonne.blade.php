@@ -111,54 +111,52 @@
             <div id="layoutSidenav_content">
                 <main>
                     <div class="container-fluid px-4">
-                        <h1 class="mt-4">Tables</h1>
+                        <h1 class="mt-4">Ajout de personne</h1>
                         <ol class="breadcrumb mb-4">
                             <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
                             <li class="breadcrumb-item active">Tables</li>
                         </ol>
                         <div class="card mb-4">
                             <div class="card-body">
-                                <a target="_blank" href="https://datatables.net/" class="btn btn-primary">Ajouter une personne</a>
+                                <a target="_blank" href="https://datatables.net/" class="btn btn-primary">Liste des personne</a>
                                 
                             </div>
                         </div>
-                        <div class="card mb-4">
-                            <div class="card-header">
-                                <i class="fas fa-table me-1"></i>
-                                Liste des personnes ressources
-                            </div>
+                        <div class="card mb-4">    
                             <div class="card-body">
-                                <table id="datatablesSimple">
-                                    <thead>
-                                        <tr>
-                                            <th>Id</th>
-                                            <th>Prenom</th>
-                                            <th>Nom</th>
-                                            <th>Email</th>
-                                            <th>Fonction</th>
-                                            <th>Action</th>
-                                            <th>Action</th>
-                                            
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @foreach($personnes as $personne)
-                                        <tr>
-                                            <td>{{ $personne->id}}</td>
-                                            <td>{{ $personne->prenom}}</td>
-                                            <td>{{ $personne->nom}}</td>
-                                            <td>{{ $personne->email}}</td>
-                                        
-                                            <td>{{ $personne->fonction_id}}</td>
-                                        
-                                            <td>
-                                            <a href="{{ url('edit'-$row->id) }}" class="btn btn-info">Editer</a>
-                                            </td>
-                                            <td> <a href="" class="btn btn-danger">Supprimer</a></td>
-                                        </tr>
+                            <form method="post" action="add">
+                                @csrf
+                                <div class="form-group">
+                                    <label for="">Prenom</label>
+                                    <input type="text" class="form-control" name="prenom" placeholder="Enter votre prenom">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="">Nom</label>
+                                    <input type="text" class="form-control" name="nom" placeholder="Enter votre nom">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="">Email</label>
+                                    <input type="text" class="form-control" name="email" placeholder="Enter votre email">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="form-control">Fonction</label> <br>
+                                    <select name="fonction_id" for="form-control">
+                                        <option value="">Veillez choisir</option>
+                                        @foreach ($fonctions as $fonction)
+                                        <option value="{{ $fonction->id }}">{{ $fonction-> $libelle}}</option>
                                         @endforeach
-                                    </tbody>
-                                </table>
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <button class="btn btn-primary btn-block">Valider</button>
+    
+                                </div>
+                        
+                            </form>
                             </div>
                         </div>
                     </div>

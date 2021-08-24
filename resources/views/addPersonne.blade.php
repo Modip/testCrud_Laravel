@@ -124,34 +124,42 @@
                         </div>
                         <div class="card mb-4">    
                             <div class="card-body">
-                            <form method="post" action="add">
-                                @csrf
-                                <div class="form-group">
-                                    <label for="">Prenom</label>
-                                    <input type="text" class="form-control" name="prenom" placeholder="Enter votre prenom">
-                                </div>
+                                @if(session()->has("success"))
+                                {{$session()->get("success")}}
+                                @endif
+                                <form method="post" action="add">
+                                    @csrf
+                                    <div class="form-group">
+                                        <label for="">Prenom</label>
+                                        <input type="text" class="form-control" name="prenom" placeholder="Enter votre prenom">
+                                    </div>
 
-                                <div class="form-group">
-                                    <label for="">Nom</label>
-                                    <input type="text" class="form-control" name="nom" placeholder="Enter votre nom">
-                                </div>
+                                    <div class="form-group">
+                                        <label for="">Nom</label>
+                                        <input type="text" class="form-control" name="nom" placeholder="Enter votre nom">
+                                    </div>
 
-                                <div class="form-group">
-                                    <label for="">Email</label>
-                                    <input type="text" class="form-control" name="email" placeholder="Enter votre email">
-                                </div>
+                                    <div class="form-group">
+                                        <label for="">Email</label>
+                                        <input type="text" class="form-control" name="email" placeholder="Enter votre email">
+                                    </div>
 
-                                <div class="form-group">
-                                    <label for="">Fonction</label>
-                                    <input type="text" class="form-control" name="fonction" placeholder="Enter votre fonction">
-                                </div>
+                                    <div class="form-group">
+                                        <label for="form-control">Fonction</label> <br>
+                                        <select name="fonction_id" for="form-control">
+                                            <option value="">Veillez choisir</option>
+                                            @foreach ($fonctions as $fonction)
+                                            <option value="{{ $fonction->id }}">{{ $fonction->libelle}}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
 
-                                <div class="form-group">
-                                    <button class="btn btn-primary btn-block">Valider</button>
-    
-                                </div>
-                        
-                            </form>
+                                    <div class="form-group">
+                                        <button class="btn btn-primary btn-block">Valider</button>
+        
+                                    </div>
+                            
+                                </form>
                             </div>
                         </div>
                     </div>

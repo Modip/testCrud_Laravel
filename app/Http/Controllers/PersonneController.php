@@ -5,7 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Personne;
 use App\Models\Fonction;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
+//use Illuminate\Support\Facades\DB;
+use DB;
 
 class PersonneController extends Controller
 {
@@ -29,19 +30,23 @@ class PersonneController extends Controller
             'prenom'=>'required',
             'nom'=>'required',
             'email'=>'required',
-            'fonction'=>'required'
+            'fonction_id'=>'required'
 
         ]);
 
-        $Query=DB::table('personnes')->insert([
-            'prenom'=>$request->input('prenom'),
-            'nom'=>$request->input('nom'),
-            'email'=>$request->input('email'),
-            'fonction'=>$request->input('fonction')
+       // $personne->prenom=$request->prenom;
+       // $personne->nom=$request->nom;
+       // $personne->email=$request->email;
+       // $personne->fonction_id=$request->fonction_id;
+        Personne::create($request->all());
 
-        ]);
+        return redirect()->route('addPersonne')->with("success", "Personne bien ajouter");
 
-        return $request->input();
+    }
 
+    public function edit($id){
+        $personne = Personne::findOrfail($id);
+
+        return view('edit', compact('personne'));
     }
 }

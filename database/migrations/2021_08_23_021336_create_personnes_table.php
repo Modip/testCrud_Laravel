@@ -18,7 +18,8 @@ class CreatePersonnesTable extends Migration
             $table->string("prenom");
             $table->string("nom");
             $table->string("email");
-            $table->string("fonction");
+            $table->unsignedBigInteger('fonction_id');
+            $table->foreign("fonction_id")->references("id")->on("fonctions");
 
             $table->timestamps();
         });
