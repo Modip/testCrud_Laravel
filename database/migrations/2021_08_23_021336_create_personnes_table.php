@@ -18,6 +18,8 @@ class CreatePersonnesTable extends Migration
             $table->string("prenom");
             $table->string("nom");
             $table->string("email");
+            $table->string("fonction");
+
             $table->timestamps();
         });
     }
