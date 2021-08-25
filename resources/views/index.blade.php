@@ -118,7 +118,7 @@
                         </ol>
                         <div class="card mb-4">
                             <div class="card-body">
-                                <a target="_blank" href="https://datatables.net/" class="btn btn-primary">Ajouter une personne</a>
+                                <a href="addPersonne" class="btn btn-primary">Ajouter une personne</a>
                                 
                             </div>
                         </div>

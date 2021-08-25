@@ -24,7 +24,7 @@ Route::get('/', function () {
 Route::get("/personne", [PersonneController::class, "index"]);
 
 Route::get("/addPersonne", [PersonneController::class, "addPersonne"]);
-Route::post("/add", [PersonneController::class, "addPersonne"]);
+Route::post("/create-personne", [PersonneController::class, "add"])->name("create-personne");
 Route::get("/personne/{personne}", [PersonneController::class, "edit"])->name("personne.edit");
 Route::put("/personne/{personne}", [PersonneController::class, "update"])->name("personne.update");
 Route::delete("/delete/{personne}", [PersonneController::class, "delete"])->name("delete.personne");

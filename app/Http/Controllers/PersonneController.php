@@ -29,19 +29,27 @@ class PersonneController extends Controller
         $request->validate([
             'prenom'=>'required',
             'nom'=>'required',
-            'email'=>'required',
+            'email'=>'required|email|unique:personnes',
             'fonction_id'=>'required'
 
         ]);
+        $personne = new Personne();
+        $personne->prenom=$request->prenom;
+        $personne->nom=$request->nom;
+        $personne->email=$request->email;
+        $personne->fonction_id=$request->fonction_id;
 
-       // $personne->prenom=$request->prenom;
-       // $personne->nom=$request->nom;
-       // $personne->email=$request->email;
-       // $personne->fonction_id=$request->fonction_id;
-        Personne::create($request->all());
+        $pers = $personne->save();
 
-       return redirect()->route('index')->with("success", "Personne bien ajouter");
-        
+        if($pers){
+            return back()->with('success', 'Personne bien ajouter');
+
+        }else {
+            return back()->with('fail', 'Erreur');
+    }
+       
+
+
     }
 
     public function edit(){

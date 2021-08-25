@@ -118,17 +118,24 @@
                         </ol>
                         <div class="card mb-4">
                             <div class="card-body">
-                                <a target="_blank" href="https://datatables.net/" class="btn btn-primary">Liste des personne</a>
+                                <a href="personne" class="btn btn-primary">Liste des personne</a>
                                 
                             </div>
                         </div>
                         <div class="card mb-4">    
                             <div class="card-body">
-                                @if(session()->has("success"))
-                                {{$session()->get("success")}}
-                                @endif
-                                <form method="post" action="add">
+                                <form action="{{route('create-personne')}}" method="post">
                                     @csrf
+                                    @if(Session::has('success'))                                        
+                                            <div class="alert alert-success">
+                                                {{Session::get('success')}}
+                                            </div>
+                                            @endif
+                                            @if(Session::has('fail'))                                       
+                                            <div class="alert alert-success">
+                                                {{Session::get('fail')}}
+                                            </div>
+                                            @endif
                                     <div class="form-group">
                                         <label for="">Prenom</label>
                                         <input type="text" class="form-control" name="prenom" placeholder="Enter votre prenom">
