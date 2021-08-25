@@ -49,4 +49,13 @@ class PersonneController extends Controller
 
         return view('edit', compact('personne'));
     }
+
+    public function delete(Personne $personne){
+        $individu = $personne->prenom ." ". $personne->nom;
+
+        $personne->delete();
+
+        return back()->with("successDelete", "La personne '$individu' est bien supprime");
+
+    }
 }

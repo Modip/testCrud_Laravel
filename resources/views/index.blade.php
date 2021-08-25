@@ -128,6 +128,11 @@
                                 Liste des personnes ressources
                             </div>
                             <div class="card-body">
+                                @if(session()->has("successDelete"))
+                                <div class="alert alert-success">
+                                    <h3> {{$session()->get("successDelete")}} </h3>
+                                </div>
+                                @endif
                                 <table id="datatablesSimple">
                                     <thead>
                                         <tr>
@@ -152,9 +157,17 @@
                                             <td>{{ $personne->fonction_id}}</td>
                                         
                                             <td>
-                                            <a href="{{ url('edit'-$row->id) }}" class="btn btn-info">Editer</a>
+                                            <a href="" class="btn btn-info">Editer</a>
                                             </td>
-                                            <td> <a href="" class="btn btn-danger">Supprimer</a></td>
+                                            <td> 
+                                                <a href="" class="btn btn-danger" onclick="if(confirm('Voulez_vous supprimer'))
+                                                {document.getElementById('form-{{$personne->id}}').submit()}">Supprimer</a>
+                                                <form id="form-{{$personne->id}}" action="{{route('deletePersonne',
+                                                    ['personne'=>$personne->id])}}" method="post">
+                                                    @csrf
+                                                    <input type="hidden" name="_method" value="delete">
+                                                </form>
+                                            </td>
                                         </tr>
                                         @endforeach
                                     </tbody>
