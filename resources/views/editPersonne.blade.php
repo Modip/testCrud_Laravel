@@ -124,39 +124,51 @@
                         </div>
                         <div class="card mb-4">    
                             <div class="card-body">
-                            <form method="post" action="add">
-                                @csrf
-                                <div class="form-group">
-                                    <label for="">Prenom</label>
-                                    <input type="text" class="form-control" name="prenom" placeholder="Enter votre prenom">
-                                </div>
+                                @if(session()->has("success"))
+                                <ul>
+                                    @foreach($errors->all() as $error)
+                                        <li>{{$error}}</li>
+                                    @endforeach    
+                                </ul>
+                                @endif
+                                <form method="post" action="{{route('personne.update', ['personne'=>$personne->id])}}">
+                                    @csrf
 
-                                <div class="form-group">
-                                    <label for="">Nom</label>
-                                    <input type="text" class="form-control" name="nom" placeholder="Enter votre nom">
-                                </div>
+                                    <input type="hidden" name="id" value="put">
 
-                                <div class="form-group">
-                                    <label for="">Email</label>
-                                    <input type="text" class="form-control" name="email" placeholder="Enter votre email">
-                                </div>
+                                    <div class="form-group">
+                                        <label for="">Prenom</label>
+                                        <input type="text" class="form-control" name="prenom" value="{{$personne->prenom}}" placeholder="Enter votre prenom">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="">Nom</label>
+                                        <input type="text" class="form-control" name="nom" value="{{$personne->nom}}" placeholder="Enter votre nom">
+                                    </div>
 
-                                <div class="form-group">
-                                    <label for="form-control">Fonction</label> <br>
-                                    <select name="fonction_id" for="form-control">
-                                        <option value="">Veillez choisir</option>
-                                        @foreach ($fonctions as $fonction)
-                                        <option value="{{ $fonction->id }}">{{ $fonction-> $libelle}}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
+                                    <div class="form-group">
+                                        <label for="">Email</label>
+                                        <input type="text" class="form-control" name="email" value="{{$personne->email}}" placeholder="Enter votre email">
+                                    </div>
 
-                                <div class="form-group">
-                                    <button class="btn btn-primary btn-block">Valider</button>
-    
-                                </div>
-                        
-                            </form>
+                                    <div class="form-group">
+                                        <label for="form-control">Fonction</label> <br>
+                                        <select name="fonction_id" for="form-control">
+                                            <option value="">Veillez choisir</option>
+                                            @foreach ($fonctions as $fonction)
+                                            @if($fonction->id == $etudiant->fonction_id)
+                                            <option value="{{ $fonction->id }}" selected>{{ $fonction->libelle}}</option>
+                                            @else
+                                            <option value="{{ $fonction->id }}" selected>{{ $fonction->libelle}}</option>
+                                            @endif
+                                            @endforeach
+                                        </select>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <button class="btn btn-primary btn-block">Valider</button>
+        
+                                    </div>
+                                </form>
                             </div>
                         </div>
                     </div>

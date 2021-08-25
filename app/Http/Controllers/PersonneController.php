@@ -40,22 +40,59 @@ class PersonneController extends Controller
        // $personne->fonction_id=$request->fonction_id;
         Personne::create($request->all());
 
-        return redirect()->route('addPersonne')->with("success", "Personne bien ajouter");
-
+       return redirect()->route('index')->with("success", "Personne bien ajouter");
+        
     }
 
-    public function edit($id){
-        $personne = Personne::findOrfail($id);
+    public function edit(){
+        $fonctions = Fonction::all();
+        $personne = Personne::all();
 
-        return view('edit', compact('personne'));
+        return view( 'editPersonne', compact("personne", "fonctions"));
     }
 
-    public function delete(Personne $personne){
+    public function update(Request $request, Personne $personne){
+        $request->validate([
+            'prenom'=>'required',
+            'nom'=>'required',
+            'email'=>'required',
+            'fonction_id'=>'required'
+
+        ]);
+        $personne->update([
+            'prenom'=>$request->prenom,
+            'nom'=>$request->nom,
+            'email'=>$request->email,
+            'fonction_id'=>$request->fonction_id
+
+        ]);
+
+        return back()->with('success', "Personne bien modifié");
+    }
+
+    public function delete($personne){
+
         $individu = $personne->prenom ." ". $personne->nom;
-
+        //Personne ::find($personne)->delete();
         $personne->delete();
 
         return back()->with("successDelete", "La personne '$individu' est bien supprime");
 
+    }
+
+
+    public function showdata ($id){
+        $data = Personne::find($id);
+        return view('edit', ['data'->$data]);
+    }
+
+    public function testupdatz (Request $req){
+        $data = Personne::find($req->id);
+        $data->prenom = $prenom->prenom;
+        $data->nom = $prenom->prenom;
+        $data->email = $email->email;
+        $data->fonction_id = $fonction_id->fonction_id;
+        $data->save();
+        return redirect('index');
     }
 }
