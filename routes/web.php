@@ -37,12 +37,6 @@ Route::post("/addFonction", [FonctionController::class, "addFonction"]);
 
 
 
-
-Route::get("/edit/{id}", [PersonneController::class, "showdata"]);
-
-
-
-
 Route::get("/registration", [CustomAuthController::class, "registration"]);
 Route::get("/login", [CustomAuthController::class, "login"]);
 
