@@ -116,6 +116,11 @@
                             <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
                             <li class="breadcrumb-item active">Tables</li>
                         </ol>
+                        @if(Session::has('delete_personne'))                                        
+                                            <div class="alert alert-success">
+                                                {{Session::get('update_personne')}}
+                                            </div>
+                                            @endif
                         <div class="card mb-4">
                             <div class="card-body">
                                 <a href="addPersonne" class="btn btn-primary">Ajouter une personne</a>
@@ -128,9 +133,9 @@
                                 Liste des personnes ressources
                             </div>
                             <div class="card-body">
-                                @if(session()->has("successDelete"))
+                                @if(Session()->has("successDelete"))
                                 <div class="alert alert-success">
-                                    <h3> {{$session()->get("successDelete")}} </h3>
+                                    <h3> {{$Session()->get("successDelete")}} </h3>
                                 </div>
                                 @endif
                                 <table id="datatablesSimple">
@@ -157,19 +162,11 @@
                                             <td>{{ $personne->fonction_id}}</td>
                                         
                                             <td>
-                                            <a href="{{route('personne.edit', ['personne'=>$personne->id])}}" class="btn btn-info">Editer</a>
+                                            <a href="/edit-personne/{{$personne->id}}" class="btn btn-info">Editer</a>
                                             </td>
-                                            <td> 
-                                                <a href="" class="btn btn-danger" onclick="if(confirm('Voulez_vous supprimer'))
-                                                {document.getElementById('form-{{$personne->id}}').submit()}">Supprimer</a>
-                                                <form id="form-{{$personne->id}}" action="{{route('delete.personne',
-                                                    ['personne'=>$personne->id])}}" method="post">
-                                                    @csrf
-                                                    <input type="hidden" name="_method" value="delete">
-                                                </form>
-                                            </td>
+                                            
                                             <td>
-                                            <a href="{{'edit/'.$personne['id']}}" class="btn btn-warning">Test Editer</a>
+                                            <a href="/delete-personne/{{$personne->id}}}" class="btn btn-danger"> Supprimer</a>
 
                                             </td>
                                         </tr>

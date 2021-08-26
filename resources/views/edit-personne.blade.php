@@ -118,7 +118,7 @@
                         </ol>
                         <div class="card mb-4">
                             <div class="card-body">
-                                <a target="_blank" href="https://datatables.net/" class="btn btn-primary">Liste des personne</a>
+                                <a  href="" class="btn btn-primary">Liste des personne</a>
                                 
                             </div>
                         </div>
@@ -131,10 +131,15 @@
                                     @endforeach    
                                 </ul>
                                 @endif
-                                <form method="post" action="{{route('personne.update', ['personne'=>$personne->id])}}">
+                                <form action="{{route('update-personne')}}" method="post">
                                     @csrf
+                                    @if(Session::has('update_personne'))                                        
+                                        <div class="alert alert-success">
+                                         {{Session::get('update_personne')}}
+                                        </div>
+                                    @endif
 
-                                    <input type="hidden" name="id" value="put">
+                                    <input type="hidden" name="id" value="{{$personne->id}}">
 
                                     <div class="form-group">
                                         <label for="">Prenom</label>
@@ -155,7 +160,7 @@
                                         <select name="fonction_id" for="form-control">
                                             <option value="">Veillez choisir</option>
                                             @foreach ($fonctions as $fonction)
-                                            @if($fonction->id == $etudiant->fonction_id)
+                                            @if($fonction->id == $personne->fonction_id)
                                             <option value="{{ $fonction->id }}" selected>{{ $fonction->libelle}}</option>
                                             @else
                                             <option value="{{ $fonction->id }}" selected>{{ $fonction->libelle}}</option>

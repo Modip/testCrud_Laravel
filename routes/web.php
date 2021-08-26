@@ -25,9 +25,13 @@ Route::get("/personne", [PersonneController::class, "index"]);
 
 Route::get("/addPersonne", [PersonneController::class, "addPersonne"]);
 Route::post("/create-personne", [PersonneController::class, "add"])->name("create-personne");
-Route::get("/personne/{personne}", [PersonneController::class, "edit"])->name("personne.edit");
-Route::put("/personne/{personne}", [PersonneController::class, "update"])->name("personne.update");
-Route::delete("/delete/{personne}", [PersonneController::class, "delete"])->name("delete.personne");
+Route::get("/edit-personne/{id}", [PersonneController::class, "editPersonne"])->name("personne.edit");
+Route::get("/personne/{id}", [PersonneController::class, "update"])->name("update.personne");
+Route::post("/update-personne", [PersonneController::class, "updatePersonne"])->name("update-personne");
+
+Route::get("/delete-personne/{id}", [PersonneController::class, "deletePersonne"])->name("delete.personne");
+
+
 
 Route::post("/addFonction", [FonctionController::class, "addFonction"]);
 

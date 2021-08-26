@@ -41,66 +41,55 @@ class PersonneController extends Controller
 
         $pers = $personne->save();
 
-        if($pers){
-            return back()->with('success', 'Personne bien ajouter');
+            if($pers){
+                return back()->with('success', 'Personne bien ajouter');
 
-        }else {
-            return back()->with('fail', 'Erreur');
-    }
-       
-
-
-    }
-
-    public function edit(){
+            }else {
+                return back()->with('fail', 'Erreur');
+        }
+    } 
+    
+    public function editPersonne($id)
+    {
         $fonctions = Fonction::all();
-        $personne = Personne::all();
+        $personne = DB::table('personnes')->where('id', $id)->first();
 
-        return view( 'editPersonne', compact("personne", "fonctions"));
+        return view('edit-personne', compact('personne', 'fonctions'));
+
     }
 
-    public function update(Request $request, Personne $personne){
-        $request->validate([
-            'prenom'=>'required',
-            'nom'=>'required',
-            'email'=>'required',
-            'fonction_id'=>'required'
 
-        ]);
-        $personne->update([
+    public function updatePersonne(Request $request)
+    {
+
+        $fonctions = Fonction::all();
+        DB::table('personnes')->where('id', $request->id)->update([
             'prenom'=>$request->prenom,
             'nom'=>$request->nom,
             'email'=>$request->email,
             'fonction_id'=>$request->fonction_id
 
         ]);
+        return back()->with('update_personne', "Personne bien modifiée", compact("fonctions"));
+          
+    } 
 
-        return back()->with('success', "Personne bien modifié");
+
+    
+    public function deletePersonne($id){
+        DB::table('personnes')->where('id', $id)->delete();
+
+        return back()->with('delete_personne', "Personne bien supprimer");
+          
+        
     }
 
-    public function delete($personne){
-
-        $individu = $personne->prenom ." ". $personne->nom;
-        //Personne ::find($personne)->delete();
-        $personne->delete();
-
-        return back()->with("successDelete", "La personne '$individu' est bien supprime");
-
-    }
 
 
-    public function showdata ($id){
-        $data = Personne::find($id);
-        return view('edit', ['data'->$data]);
-    }
+    
 
-    public function testupdatz (Request $req){
-        $data = Personne::find($req->id);
-        $data->prenom = $prenom->prenom;
-        $data->nom = $prenom->prenom;
-        $data->email = $email->email;
-        $data->fonction_id = $fonction_id->fonction_id;
-        $data->save();
-        return redirect('index');
-    }
+
+    
+
+    
 }

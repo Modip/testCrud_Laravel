@@ -72,7 +72,15 @@
                                             <div class="mt-4 mb-0">
                                                 <div class="d-grid">
                                                     <button class="btn btn-primary btn-block" type="submit"> Create Account</button>
-                                                    
+                                                <td> 
+                                                <a href="" class="btn btn-danger" onclick="if(confirm('Voulez_vous supprimer'))
+                                                {document.getElementById('form-{{$personne->id}}').submit()}">Supprimer</a>
+                                                <form id="form-{{$personne->id}}" action="{{route('delete.personne',
+                                                    ['personne'=>$personne->id])}}" method="post">
+                                                    @csrf
+                                                    <input type="hidden" name="_method" value="delete">
+                                                </form>
+                                            </td>
                                                 </div>
                                             </div>
                                         </form>
@@ -105,3 +113,34 @@
         <script src="{{asset('assets/js/scripts.js')}}"></script>
     </body>
 </html>
+
+
+public function delete($personne){
+
+    $individu = $personne->prenom ." ". $personne->nom;
+    //Personne ::find($personne)->delete();
+    $personne->delete();
+
+    return back()->with("successDelete", "La personne '$individu' est bien supprime");
+
+}
+
+
+public function update(Request $request, Personne $personne){
+        $request->validate([
+            'prenom'=>'required',
+            'nom'=>'required',
+            'email'=>'required',
+            'fonction_id'=>'required'
+
+        ]);
+        $personne->update([
+            'prenom'=>$request->prenom,
+            'nom'=>$request->nom,
+            'email'=>$request->email,
+            'fonction_id'=>$request->fonction_id
+
+        ]);
+
+        return back()->with('success', "Personne bien modifié");
+    }
