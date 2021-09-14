@@ -11,5 +11,6 @@
 
 - Aller dans le Github du projet [Github](https://github.com/Modip/testCrud_Laravel). 
 - Télécharger le code source.
-- Créer une base de donnée du meme nom que celle qui est dans le code. 
-- Faire les migrations.
+- Créer une base de donnée du meme nom que celle qui est dans le code (testCrud_Laravel). 
+- Faire les migrations <br>
+On tape la commande 'php artisan migrate' dans le terminal.
