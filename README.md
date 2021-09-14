@@ -11,5 +11,5 @@
 
 - Aller dans le Github du projet [Github](https://github.com/Modip/testCrud_Laravel). 
 - Télécharger le code source.
-- Créer une base de doonée du meme nom que celle qui dans le code. 
+- Créer une base de donnée du meme nom que celle qui est dans le code. 
 - Faire les migrations.
