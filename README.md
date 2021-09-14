@@ -7,7 +7,7 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
 
-## Installation de Laravel
+## Installation du projet
 
 - Aller dans le Github du projet [Github](https://github.com/Modip/testCrud_Laravel). 
 - Télécharger le code source.
