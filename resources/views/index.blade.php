@@ -49,7 +49,7 @@
                                             <td>{{ $personne->nom}}</td>
                                             <td>{{ $personne->email}}</td>
                                         
-                                            <td>{{ $personne->fonction_id}}</td>
+                                            <td>{{ $personne->Fonction->libelle}}</td>
                                         
                                             <td>
                                             <a href="/edit-personne/{{$personne->id}}" class="btn btn-info">Editer</a>
